@@ -1,0 +1,6 @@
+@EnergyTrack.API_HostAddress = http://localhost:5113
+
+GET {{EnergyTrack.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

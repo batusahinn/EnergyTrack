@@ -1,0 +1,31 @@
+# .NET
+backend/bin/
+backend/obj/
+backend/*.user
+backend/.vs/
+
+# EF Core migration bundle (not the migration files themselves)
+*.bundle
+
+# dotnet secrets
+**/secrets.json
+**/appsettings.local.json
+
+# Flutter
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/build/
+mobile/.packages
+mobile/pubspec.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
