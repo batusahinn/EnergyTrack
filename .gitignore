@@ -17,7 +17,7 @@ mobile/.flutter-plugins
 mobile/.flutter-plugins-dependencies
 mobile/build/
 mobile/.packages
-mobile/pubspec.lock
+# pubspec.lock is intentionally committed for apps (reproducible builds)
 
 # OS
 .DS_Store
