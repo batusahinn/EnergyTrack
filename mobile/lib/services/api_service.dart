@@ -8,6 +8,7 @@ import '../models/alert.dart';
 class ApiService {
   static const String _baseUrl = 'http://10.0.2.2:5113/api/v1';
   static const String _tokenKey = 'jwt_token';
+  static const Duration _timeout = Duration(seconds: 30);
 
   // ── Auth ────────────────────────────────────────────────────────────────
 
@@ -16,7 +17,7 @@ class ApiService {
       Uri.parse('$_baseUrl/auth/login'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'username': username, 'password': password}),
-    );
+    ).timeout(_timeout);
     if (res.statusCode == 200) {
       final token = jsonDecode(res.body)['token'] as String;
       final prefs = await SharedPreferences.getInstance();
@@ -31,7 +32,7 @@ class ApiService {
       Uri.parse('$_baseUrl/auth/register'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'username': username, 'password': password}),
-    );
+    ).timeout(_timeout);
     return res.statusCode == 200;
   }
 
@@ -67,7 +68,7 @@ class ApiService {
     final res = await http.get(
       Uri.parse('$_baseUrl/devices'),
       headers: await _authHeaders(),
-    );
+    ).timeout(_timeout);
     _checkStatus(res);
     return (jsonDecode(res.body) as List)
         .map((j) => Device.fromJson(j))
@@ -79,7 +80,7 @@ class ApiService {
       Uri.parse('$_baseUrl/devices'),
       headers: await _authHeaders(),
       body: jsonEncode({'name': name, 'location': location, 'type': type}),
-    );
+    ).timeout(_timeout);
     _checkStatus(res);
     return Device.fromJson(jsonDecode(res.body));
   }
@@ -88,7 +89,7 @@ class ApiService {
     final res = await http.delete(
       Uri.parse('$_baseUrl/devices/$id'),
       headers: await _authHeaders(),
-    );
+    ).timeout(_timeout);
     _checkStatus(res);
   }
 
@@ -98,7 +99,7 @@ class ApiService {
     final res = await http.get(
       Uri.parse('$_baseUrl/readings/device/$deviceId'),
       headers: await _authHeaders(),
-    );
+    ).timeout(_timeout);
     _checkStatus(res);
     return (jsonDecode(res.body) as List)
         .map((j) => Reading.fromJson(j))
@@ -110,7 +111,7 @@ class ApiService {
       Uri.parse('$_baseUrl/readings'),
       headers: await _authHeaders(),
       body: jsonEncode({'deviceId': deviceId, 'value': value, 'unit': unit}),
-    );
+    ).timeout(_timeout);
     _checkStatus(res);
     return Reading.fromJson(jsonDecode(res.body));
   }
@@ -121,7 +122,7 @@ class ApiService {
     final res = await http.get(
       Uri.parse('$_baseUrl/alerts'),
       headers: await _authHeaders(),
-    );
+    ).timeout(_timeout);
     _checkStatus(res);
     return (jsonDecode(res.body) as List)
         .map((j) => Alert.fromJson(j))
@@ -132,7 +133,7 @@ class ApiService {
     final res = await http.get(
       Uri.parse('$_baseUrl/alerts/device/$deviceId'),
       headers: await _authHeaders(),
-    );
+    ).timeout(_timeout);
     _checkStatus(res);
     return (jsonDecode(res.body) as List)
         .map((j) => Alert.fromJson(j))
@@ -143,7 +144,7 @@ class ApiService {
     final res = await http.delete(
       Uri.parse('$_baseUrl/alerts/$id'),
       headers: await _authHeaders(),
-    );
+    ).timeout(_timeout);
     _checkStatus(res);
   }
 }

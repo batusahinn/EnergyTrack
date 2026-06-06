@@ -6,6 +6,14 @@ Built as a portfolio project for an IQB Solutions job application.
 
 ---
 
+## Screenshots
+
+| Login | Dashboard |
+|---|---|
+| ![Login screen](screenshots/login.png) | ![Dashboard screen](screenshots/dashboard.png) |
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
